@@ -23,7 +23,7 @@ func (pr *PetRepository) Save(entity.Pet) error {
 
 func (pr *PetRepository) FindById(id int) (pet *entity.Pet, err error) {
 	var petToRecive entity.Pet 
-	err = pr.dbconnection.QueryRow("SELECT id, name, localization_ong, pet_details, social_media_ong FROM pet WHERE id = ?", id).Scan(&petToRecive.Id, &petToRecive.Name, &petToRecive.LocalizationOng, &petToRecive.PetDetails, &petToRecive.SocialMediaOng)
+	err = pr.dbconnection.QueryRow("SELECT id, name, localization_ong, pet_details, social_media_ong FROM pet WHERE id = ?", id).Scan(&petToRecive.Id, &petToRecive.Name, &petToRecive.BreedId, &petToRecive.Size, &petToRecive.Weight, &petToRecive.AdoptionDate, &petToRecive.Birthdate, &petToRecive.Comorbidity, &petToRecive.Tags, &petToRecive.Castrated, &petToRecive.AvaliableToAdoption, &petToRecive.UserId)
 	if err != nil && err != sql.ErrNoRows {
 		err = fmt.Errorf("error finding pet %d: %w", id, err)
 		fmt.Println(err)
